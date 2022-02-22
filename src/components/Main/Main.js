@@ -22,6 +22,19 @@ export default class Main extends Component {
     });
   };
 
+  // updateHandler = (event, index) => {
+
+  // };
+
+  deleteHandler = (event, index) => {
+    const { tarefas } = this.state;
+    tarefas.splice(index, 1);
+
+    this.setState({
+      tarefas: [...tarefas],
+    });
+  };
+
   changeHandler = (event) => {
     this.setState({
       novaTarefa: event.target.value,
@@ -47,12 +60,12 @@ export default class Main extends Component {
         </form>
 
         <ul className="tarefas">
-          {tarefas.map((tarefa) => (
+          {tarefas.map((tarefa, index) => (
             <li key={tarefa}>
               {tarefa}
               <div>
-                <FaEdit className="update" />
-                <FaWindowClose className="delete" />
+                <FaEdit onClick={(event) => this.updateHandler(event, index)} className="update" />
+                <FaWindowClose onClick={(event) => this.deleteHandler(event, index)} className="delete" />
               </div>
             </li>
           ))}
